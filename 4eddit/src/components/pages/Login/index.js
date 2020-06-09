@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import { useTheme, useForm } from "../../Hooks";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -18,6 +19,10 @@ import {
 const { MyTheme } = useTheme();
 
 const Login = () => {
+  let history = useHistory();
+  const goToRegisterPage = () => history.push("/register");
+  const goToFeedPage = () => history.push("/");
+
   const { form, onChange } = useForm({
     email: "",
     password: "",
@@ -45,6 +50,7 @@ const Login = () => {
       .then((response) => {
         console.log(response);
         localStorage.setItem("token", response.data.token);
+        goToFeedPage();
       })
       .catch((error) => {
         window.alert("Falha ao entrar.");
@@ -84,6 +90,7 @@ const Login = () => {
                 color='primary'
                 disableElevation
                 size='medium'
+                onClick={goToRegisterPage}
               >
                 Cadastrar
               </Button>

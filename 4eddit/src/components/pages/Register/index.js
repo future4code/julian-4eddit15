@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from 'react-router-dom';
 import { useTheme, useForm } from "../../Hooks";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -18,6 +19,9 @@ import {
 const MyTheme = useTheme();
 
 const Register = () => {
+  let history = useHistory();
+  const goToFeedPage = () => history.push("/");
+
   const { form, onChange } = useForm({
     username: "",
     email: "",
@@ -46,6 +50,7 @@ const Register = () => {
       )
       .then((response) => {
         localStorage.setItem("token", response.data.token);
+        goToFeedPage();
       })
       .catch((error) => {
         window.alert("Falha ao cadastrar.");
