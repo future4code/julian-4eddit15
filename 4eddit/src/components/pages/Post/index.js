@@ -1,7 +1,9 @@
 import React from 'react';
 import Comment from './Comment';
 import CreateComment from './CreateComment';
+import Header from '../../Header';
 import Post from './PostElement';
+import { usePrivatePage } from '../../../hooks/usePrivatePage';
 import styled from 'styled-components';
 
 const PostPageContainer = styled.div`
@@ -13,8 +15,10 @@ const PostPageContainer = styled.div`
 `
 
 const PostPage = () => {
+    usePrivatePage();
     return (
         <PostPageContainer>
+            <Header />
             <Post
                 username={"wcardosos"}
                 content={"Postagem teste"}
