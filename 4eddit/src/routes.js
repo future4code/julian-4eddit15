@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Feed from './pages/Feed/index';
-import Login from './pages/Login/index';
-import Post from './pages/Post/index';
-import Register from './pages/Register/index';
+import Feed from './components/pages/Feed/index';
+import Login from './components/pages/Login/index';
+import Post from './components/pages/Post/index';
+import Register from './components/pages/Register/index';
 
 const Routes = () => {
     return (
