@@ -7,7 +7,7 @@ const Container = Styled.main`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e5e5e4;
+    background-color: #18262f;
 `;
 
 const Logotipo = Styled.img`
