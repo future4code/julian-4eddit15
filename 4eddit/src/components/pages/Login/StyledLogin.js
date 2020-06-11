@@ -2,7 +2,6 @@ import Styled from "styled-components";
 import BackgroundLogin from "../../../img/backgroundLogin.png";
 
 export const Container = Styled.main`
-    font-family: 'Ubuntu', sans-serif;
     background-image: url(${BackgroundLogin});
     background-size: 100% 100%;
     background-position: center;

@@ -8,6 +8,5 @@ export const useTheme = () => {
       },
     },
   });
-
   return MyTheme;
 };
