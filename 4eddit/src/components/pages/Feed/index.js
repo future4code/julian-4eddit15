@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from 'react-router-dom';
-import Header from "../../Header";
+import React from "react";
+import { useHistory } from "react-router-dom";
 import Post from "./PostElement";
 import axios from "axios";
 import styled from "styled-components";
 import { useTheme } from "../../../hooks/useTheme";
 import { useForm } from "../../../hooks/useForm";
+import { usePostsList } from "../../../hooks/usePostsList";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { MuiThemeProvider } from "@material-ui/core";
@@ -16,10 +16,10 @@ const FeedContainer = styled.div`
   min-height: 100vh;
 `;
 
-const { MyTheme } = useTheme();
+const MyTheme = useTheme();
 
 const Feed = () => {
-  const [posts, setPosts] = useState([]);
+  const posts = usePostsList();
   const token = localStorage.getItem("token");
 
   let history = useHistory();
@@ -34,24 +34,6 @@ const Feed = () => {
     const { value, name } = event.target;
 
     onChange(name, value);
-  };
-
-  const getPosts = () => {
-    axios
-      .get(
-        "https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts",
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      )
-      .then((response) => {
-        setPosts(response.data.posts);
-      })
-      .catch((error) => {
-        alert("Erro na obtenção dos dados");
-      });
   };
 
   const handleSubmit = (event) => {
@@ -74,18 +56,12 @@ const Feed = () => {
       )
       .then((response) => {
         resetForm();
-        getPosts();
+        posts();
       })
       .catch((error) => {
         window.alert("Falha ao postar.");
       });
   };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
-
-  
 
   const postsList = posts.map((post) => {
     return (
@@ -96,7 +72,7 @@ const Feed = () => {
         content={post.text}
         votesNumber={post.votesCount}
         commentsNumber={post.commentsCount}
-        details={ () => goToPostDetails(post.id)}
+        details={() => goToPostDetails(post.id)}
       />
     );
   });

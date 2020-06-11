@@ -18,7 +18,7 @@ import {
   ContainerButtons,
 } from "./StyledLogin";
 
-const { MyTheme } = useTheme();
+const MyTheme = useTheme();
 
 const Login = () => {
   let history = useHistory();

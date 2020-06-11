@@ -16,7 +16,7 @@ const PostPageContainer = styled.div`
   min-height: 100vh;
 `;
 
-const PostPage = (props) => {
+const PostPage = () => {
   usePrivatePage();
 
   const [post, setPost] = useState("");
@@ -63,6 +63,7 @@ const PostPage = (props) => {
         content={post.text}
         votesNumber={post.votesCount}
         commentsNumber={post.commentsCount}
+        id={post.id}
         view
       />
       <CreateComment />

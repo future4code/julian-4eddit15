@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import { useTheme } from "../../../hooks/useTheme";
 import { useForm } from "../../../hooks/useForm";
 import TextField from "@material-ui/core/TextField";
@@ -22,6 +22,7 @@ const MyTheme = useTheme();
 const Register = () => {
   let history = useHistory();
   const goToFeedPage = () => history.push("/");
+  const goToLoginPage = () => history.push("/login");
 
   const { form, onChange } = useForm({
     username: "",
@@ -57,8 +58,6 @@ const Register = () => {
         window.alert("Falha ao cadastrar.");
       });
   };
-
-  const back = () => {};
 
   return (
     <MuiThemeProvider theme={MyTheme}>
@@ -102,7 +101,7 @@ const Register = () => {
                 color='primary'
                 disableElevation
                 size='medium'
-                onClick={back}
+                onClick={goToLoginPage}
               >
                 Voltar
               </Button>
