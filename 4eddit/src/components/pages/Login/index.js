@@ -61,7 +61,6 @@ const Login = () => {
 
   return (
     <MuiThemeProvider theme={MyTheme}>
-      <Header />
       <Container>
         <ContainerForm>
           <Form onSubmit={handleSubmit}>
