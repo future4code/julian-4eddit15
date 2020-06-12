@@ -7,8 +7,11 @@ import Post from "../Feed/PostElement";
 import { usePrivatePage } from "../../../hooks/usePrivatePage";
 import axios from "axios";
 import styled from "styled-components";
+import { MuiThemeProvider } from "@material-ui/core";
+import { useTheme } from "../../../hooks/useTheme";
 
 const PostPageContainer = styled.div`
+  background-color: #dae0e6;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,13 +20,14 @@ const PostPageContainer = styled.div`
 `;
 
 const PostPage = () => {
+  const MyTheme = useTheme();
   usePrivatePage();
 
   const [post, setPost] = useState("");
 
   const pathParams = useParams();
 
-  useEffect(() => {
+  const getPostDetails = () => {
     axios
       .get(
         `https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${pathParams.post_id}`,
@@ -37,38 +41,49 @@ const PostPage = () => {
         setPost(response.data.post);
       })
       .catch((error) => {
-        alert("Erro na obtenção dos dados");
+        console.log(error);
       });
-  }, [pathParams.post_id]);
+  };
+
+  useEffect(() => {
+    getPostDetails();
+  }, []);
 
   let comments;
+
   if (post.comments) {
     comments = post.comments.map((comment) => {
       return (
         <Comment
+          key={comment.id}
           username={comment.username}
           text={comment.text}
           votes={comment.votesCount}
+          idComment={comment.id}
+          getPostDetail={getPostDetails}
+          idPost={pathParams.post_id}
         />
       );
     });
   }
 
   return (
-    <PostPageContainer>
+    <MuiThemeProvider theme={MyTheme}>
       <Header />
-      <Post
-        username={post.username}
-        title={post.title}
-        content={post.text}
-        votesNumber={post.votesCount}
-        commentsNumber={post.commentsCount}
-        id={post.id}
-        view
-      />
-      <CreateComment />
-      {comments}
-    </PostPageContainer>
+      <PostPageContainer>
+        <Post
+          username={post.username}
+          title={post.title}
+          content={post.text}
+          votesNumber={post.votesCount}
+          commentsNumber={post.commentsCount}
+          id={post.id}
+          getPostDetail={getPostDetails}
+        />
+        <CreateComment getPostDetail={getPostDetails} id={post.id} />
+        {comments}
+      </PostPageContainer>
+    </MuiThemeProvider>
   );
 };
 

@@ -6,9 +6,9 @@ const Container = styled(Card)`
   display: grid;
   justify-items: center;
   align-items: center;
-  width: 30%;
-  height: 25vh;
-  margin: 5vh 0;
+  width: 40%;
+  min-height: 25vh;
+  margin: 2vh 0;
 `;
 
 const CommentContainer = (props) => {
