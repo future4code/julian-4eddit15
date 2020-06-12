@@ -46,7 +46,7 @@ const Feed = () => {
   if (token === null) {
     history.push("/login");
   }
-  
+
   const goToPostDetails = (id) => history.push(`/post/${id}`);
 
   const { form, onChange, resetForm } = useForm({
@@ -101,7 +101,7 @@ const Feed = () => {
         setPosts(response.data.posts);
       })
       .catch((error) => {
-        alert("Erro na obtenção dos dados");
+        console.log(error);
       });
   };
 
