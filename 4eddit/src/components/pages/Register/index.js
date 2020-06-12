@@ -17,9 +17,8 @@ import {
   ContainerButtons,
 } from "../Login/StyledLogin";
 
-const MyTheme = useTheme();
-
 const Register = () => {
+  const MyTheme = useTheme();
   let history = useHistory();
   const goToFeedPage = () => history.push("/");
   const goToLoginPage = () => history.push("/login");

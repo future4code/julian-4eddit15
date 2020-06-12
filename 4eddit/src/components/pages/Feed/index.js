@@ -40,9 +40,13 @@ const MyTheme = useTheme();
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
+  let history = useHistory();
   const token = localStorage.getItem("token");
 
-  let history = useHistory();
+  if (token === null) {
+    history.push("/login");
+  }
+  
   const goToPostDetails = (id) => history.push(`/post/${id}`);
 
   const { form, onChange, resetForm } = useForm({

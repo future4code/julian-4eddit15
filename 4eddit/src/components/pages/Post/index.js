@@ -4,11 +4,11 @@ import Comment from "./Comment";
 import CreateComment from "./CreateComment";
 import Header from "../../Header";
 import Post from "../Feed/PostElement";
-import { usePrivatePage } from "../../../hooks/usePrivatePage";
 import axios from "axios";
 import styled from "styled-components";
 import { MuiThemeProvider } from "@material-ui/core";
 import { useTheme } from "../../../hooks/useTheme";
+import { useHistory } from "react-router-dom";
 
 const PostPageContainer = styled.div`
   background-color: #dae0e6;
@@ -21,7 +21,12 @@ const PostPageContainer = styled.div`
 
 const PostPage = () => {
   const MyTheme = useTheme();
-  usePrivatePage();
+  let history = useHistory();
+  const token = localStorage.getItem("token");
+
+  if (token === null) {
+    history.push("/login");
+  }
 
   const [post, setPost] = useState("");
 
